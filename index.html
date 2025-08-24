@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmConnect - Sustainable Agriculture Platform</title>
+    <meta name="description" content="Connect farmers, NGOs, and communities for sustainable agriculture, food rescue, and smart farming solutions.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌱 FarmConnect</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" data-testid="link-home">Home</a></li>
+                <li><a href="farmer.html" data-testid="link-farmer">Farmer Portal</a></li>
+                <li><a href="ngo.html" data-testid="link-ngo">NGO Portal</a></li>
+                <li><a href="market.html" data-testid="link-market">Market</a></li>
+            </ul>
+            <div class="hamburger" data-testid="button-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title" data-testid="text-hero-title">Connecting Communities for Sustainable Agriculture</h1>
+            <p class="hero-subtitle" data-testid="text-hero-subtitle">Bridging the gap between farmers, NGOs, and communities to create a sustainable food ecosystem</p>
+            <div class="hero-buttons">
+                <a href="farmer.html" class="btn btn-primary" data-testid="button-farmer-portal">Farmer Portal</a>
+                <a href="ngo.html" class="btn btn-secondary" data-testid="button-ngo-portal">NGO Portal</a>
+                <a href="market.html" class="btn btn-outline" data-testid="button-market">Visit Market</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-icons">
+                <div class="icon-item">🌾</div>
+                <div class="icon-item">🚜</div>
+                <div class="icon-item">🌱</div>
+                <div class="icon-item">🍎</div>
+                <div class="icon-item">♻️</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title" data-testid="text-features-title">Our Solutions</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-testid="card-food-rescue">
+                    <div class="feature-icon">🍽️</div>
+                    <h3>Food Rescue</h3>
+                    <p>Connect surplus food from farms directly to NGOs and shelters, reducing waste and feeding communities.</p>
+                </div>
+                <div class="feature-card" data-testid="card-waste-fertilizer">
+                    <div class="feature-icon">♻️</div>
+                    <h3>Waste-to-Fertilizer</h3>
+                    <p>Transform biodegradable waste into valuable compost and organic fertilizer for sustainable farming.</p>
+                </div>
+                <div class="feature-card" data-testid="card-smart-farming">
+                    <div class="feature-icon">🤖</div>
+                    <h3>Smart Farming</h3>
+                    <p>AI-powered tools combined with organic fertilizers to maximize crop yield and efficiency.</p>
+                </div>
+                <div class="feature-card" data-testid="card-farmer-market">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Farmer-to-Market</h3>
+                    <p>Direct sales platform connecting farmers with consumers for fair pricing and fresh produce.</p>
+                </div>
+                <div class="feature-card" data-testid="card-urban-participation">
+                    <div class="feature-icon">🏙️</div>
+                    <h3>Urban Participation</h3>
+                    <p>Microgreens DIY kits and local volunteering opportunities for urban communities.</p>
+                </div>
+                <div class="feature-card" data-testid="card-community">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Community Network</h3>
+                    <p>Building connections between all stakeholders in the agricultural ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-testid="stat-farmers">
+                    <div class="stat-number" data-target="500">0</div>
+                    <div class="stat-label">Farmers Connected</div>
+                </div>
+                <div class="stat-item" data-testid="stat-ngos">
+                    <div class="stat-number" data-target="150">0</div>
+                    <div class="stat-label">NGOs Partnered</div>
+                </div>
+                <div class="stat-item" data-testid="stat-food">
+                    <div class="stat-number" data-target="10000">0</div>
+                    <div class="stat-label">Tons Food Rescued</div>
+                </div>
+                <div class="stat-item" data-testid="stat-fertilizer">
+                    <div class="stat-number" data-target="5000">0</div>
+                    <div class="stat-label">Tons Fertilizer Produced</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <div class="container">
+            <h2 data-testid="text-cta-title">Ready to Join Our Mission?</h2>
+            <p data-testid="text-cta-subtitle">Whether you're a farmer looking to optimize your yield or an NGO wanting to help communities, we're here to connect you.</p>
+            <div class="cta-buttons">
+                <a href="farmer.html" class="btn btn-primary" data-testid="button-get-started-farmer">Get Started as Farmer</a>
+                <a href="ngo.html" class="btn btn-outline" data-testid="button-get-started-ngo">Get Started as NGO</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🌱 FarmConnect</h3>
+                    <p>Connecting communities for sustainable agriculture and food security.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-food-rescue">Food Rescue</a></li>
+                        <li><a href="#" data-testid="link-waste-fertilizer">Waste-to-Fertilizer</a></li>
+                        <li><a href="#" data-testid="link-smart-farming">Smart Farming</a></li>
+                        <li><a href="#" data-testid="link-farmer-market">Farmer-to-Market</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="farmer.html" data-testid="link-footer-farmer">Farmers</a></li>
+                        <li><a href="ngo.html" data-testid="link-footer-ngo">NGOs</a></li>
+                        <li><a href="#" data-testid="link-volunteers">Volunteers</a></li>
+                        <li><a href="#" data-testid="link-urban-farming">Urban Farming</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@farmconnect.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

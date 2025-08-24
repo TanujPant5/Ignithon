@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Portal - FarmConnect</title>
+    <meta name="description" content="NGO dashboard for receiving food donations, managing volunteers, and coordinating waste-to-fertilizer programs.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌱 FarmConnect</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" data-testid="link-home">Home</a></li>
+                <li><a href="farmer.html" data-testid="link-farmer">Farmer Portal</a></li>
+                <li><a href="ngo.html" class="active" data-testid="link-ngo">NGO Portal</a></li>
+                <li><a href="market.html" data-testid="link-market">Market</a></li>
+            </ul>
+            <div class="hamburger" data-testid="button-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="dashboard-hero">
+        <div class="container">
+            <h1 data-testid="text-ngo-title">Welcome, NGO Partner! 🤝</h1>
+            <p data-testid="text-ngo-subtitle">Coordinate food rescue, manage volunteers, and support sustainable agriculture</p>
+        </div>
+    </section>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Available Food Donations -->
+                <div class="dashboard-card" data-testid="card-food-donations">
+                    <div class="card-icon">🍽️</div>
+                    <h3>Available Food Donations</h3>
+                    <p>Fresh surplus food from local farmers</p>
+                    <div class="card-content">
+                        <div class="donation-list" id="available-donations" data-testid="list-donations">
+                            <div class="donation-item" data-testid="donation-item-1">
+                                <div class="donation-info">
+                                    <h4>50kg Fresh Carrots</h4>
+                                    <p>Green Valley Farm • Best before: Dec 28, 2024</p>
+                                    <p>📍 123 Farm Road, Valley County</p>
+                                </div>
+                                <button class="btn btn-primary" onclick="claimDonation('carrots')" data-testid="button-claim-carrots">Claim</button>
+                            </div>
+                            <div class="donation-item" data-testid="donation-item-2">
+                                <div class="donation-info">
+                                    <h4>30kg Organic Apples</h4>
+                                    <p>Sunset Orchard • Best before: Dec 30, 2024</p>
+                                    <p>📍 456 Orchard Lane, Hill District</p>
+                                </div>
+                                <button class="btn btn-primary" onclick="claimDonation('apples')" data-testid="button-claim-apples">Claim</button>
+                            </div>
+                            <div class="donation-item" data-testid="donation-item-3">
+                                <div class="donation-info">
+                                    <h4>75kg Mixed Vegetables</h4>
+                                    <p>Community Garden Co-op • Best before: Dec 27, 2024</p>
+                                    <p>📍 789 Garden Street, Downtown</p>
+                                </div>
+                                <button class="btn btn-primary" onclick="claimDonation('vegetables')" data-testid="button-claim-vegetables">Claim</button>
+                            </div>
+                        </div>
+                        <div id="claim-status" class="status-message" data-testid="text-claim-status"></div>
+                    </div>
+                </div>
+
+                <!-- Waste Collection Program -->
+                <div class="dashboard-card" data-testid="card-waste-collection">
+                    <div class="card-icon">♻️</div>
+                    <h3>Waste-to-Fertilizer Program</h3>
+                    <p>Collect organic waste for composting</p>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="waste-type" data-testid="label-waste-type">Waste Type:</label>
+                            <select id="waste-type" data-testid="select-waste-type">
+                                <option value="">Select Waste Type</option>
+                                <option value="food-scraps">Food Scraps</option>
+                                <option value="garden-waste">Garden Waste</option>
+                                <option value="organic-waste">General Organic Waste</option>
+                                <option value="restaurant-waste">Restaurant Waste</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="waste-quantity" data-testid="label-waste-quantity">Estimated Quantity (kg):</label>
+                            <input type="number" id="waste-quantity" placeholder="Enter quantity" data-testid="input-waste-quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="collection-location" data-testid="label-collection-location">Collection Location:</label>
+                            <input type="text" id="collection-location" placeholder="Enter address" data-testid="input-collection-location">
+                        </div>
+                        <div class="form-group">
+                            <label for="collection-date" data-testid="label-collection-date">Preferred Collection Date:</label>
+                            <input type="date" id="collection-date" data-testid="input-collection-date">
+                        </div>
+                        <button class="btn btn-primary" onclick="scheduleWasteCollection()" data-testid="button-schedule-collection">Schedule Collection</button>
+                        <div id="collection-status" class="status-message" data-testid="text-collection-status"></div>
+                    </div>
+                </div>
+
+                <!-- Volunteer Management -->
+                <div class="dashboard-card" data-testid="card-volunteers">
+                    <div class="card-icon">👥</div>
+                    <h3>Volunteer Management</h3>
+                    <p>Coordinate community volunteers</p>
+                    <div class="card-content">
+                        <div class="volunteer-stats">
+                            <div class="stat" data-testid="stat-active-volunteers">
+                                <h4>Active Volunteers</h4>
+                                <div class="stat-number">24</div>
+                            </div>
+                            <div class="stat" data-testid="stat-hours-volunteered">
+                                <h4>Hours This Month</h4>
+                                <div class="stat-number">186</div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-type" data-testid="label-task-type">Create New Task:</label>
+                            <select id="task-type" data-testid="select-task-type">
+                                <option value="">Select Task Type</option>
+                                <option value="food-pickup">Food Pickup</option>
+                                <option value="sorting">Food Sorting</option>
+                                <option value="distribution">Food Distribution</option>
+                                <option value="composting">Composting Work</option>
+                                <option value="urban-garden">Urban Garden Setup</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-date" data-testid="label-task-date">Task Date:</label>
+                            <input type="date" id="task-date" data-testid="input-task-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="volunteers-needed" data-testid="label-volunteers-needed">Volunteers Needed:</label>
+                            <input type="number" id="volunteers-needed" placeholder="Number of volunteers" data-testid="input-volunteers-needed">
+                        </div>
+                        <button class="btn btn-primary" onclick="createVolunteerTask()" data-testid="button-create-task">Create Task</button>
+                        <div id="task-status" class="status-message" data-testid="text-task-status"></div>
+                    </div>
+                </div>
+
+                <!-- Community Impact -->
+                <div class="dashboard-card wide" data-testid="card-impact">
+                    <div class="card-icon">📊</div>
+                    <h3>Community Impact</h3>
+                    <p>Track the positive impact of your organization</p>
+                    <div class="impact-grid">
+                        <div class="impact-metric" data-testid="metric-meals">
+                            <h4>Meals Provided</h4>
+                            <div class="metric-value">1,248</div>
+                            <div class="metric-period">This month</div>
+                            <div class="metric-trend positive">+23% vs last month</div>
+                        </div>
+                        <div class="impact-metric" data-testid="metric-families">
+                            <h4>Families Served</h4>
+                            <div class="metric-value">156</div>
+                            <div class="metric-period">This month</div>
+                            <div class="metric-trend positive">+18% vs last month</div>
+                        </div>
+                        <div class="impact-metric" data-testid="metric-waste-diverted">
+                            <h4>Waste Diverted</h4>
+                            <div class="metric-value">3.2 tons</div>
+                            <div class="metric-period">This month</div>
+                            <div class="metric-trend positive">+31% vs last month</div>
+                        </div>
+                        <div class="impact-metric" data-testid="metric-compost-produced">
+                            <h4>Compost Produced</h4>
+                            <div class="metric-value">1.8 tons</div>
+                            <div class="metric-period">This month</div>
+                            <div class="metric-trend positive">+25% vs last month</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Distribution Centers -->
+                <div class="dashboard-card" data-testid="card-distribution">
+                    <div class="card-icon">🚛</div>
+                    <h3>Distribution Centers</h3>
+                    <p>Manage food distribution locations</p>
+                    <div class="card-content">
+                        <div class="center-list">
+                            <div class="center-item" data-testid="center-downtown">
+                                <h4>Downtown Community Center</h4>
+                                <p>123 Main Street • Open: Mon, Wed, Fri 9AM-5PM</p>
+                                <div class="center-stats">
+                                    <span>Capacity: 200 families/week</span>
+                                    <span class="utilization">Current: 85% utilized</span>
+                                </div>
+                            </div>
+                            <div class="center-item" data-testid="center-eastside">
+                                <h4>Eastside Food Hub</h4>
+                                <p>456 Oak Avenue • Open: Tue, Thu, Sat 10AM-4PM</p>
+                                <div class="center-stats">
+                                    <span>Capacity: 150 families/week</span>
+                                    <span class="utilization">Current: 72% utilized</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="addDistributionCenter()" data-testid="button-add-center">Add New Center</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🌱 FarmConnect</h3>
+                    <p>Supporting NGOs in fighting food insecurity and environmental challenges.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>NGO Resources</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-food-rescue-guide">Food Rescue Guide</a></li>
+                        <li><a href="#" data-testid="link-volunteer-training">Volunteer Training</a></li>
+                        <li><a href="#" data-testid="link-composting-program">Composting Program</a></li>
+                        <li><a href="#" data-testid="link-urban-farming-toolkit">Urban Farming Toolkit</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-ngo-help">NGO Help Center</a></li>
+                        <li><a href="#" data-testid="link-best-practices">Best Practices</a></li>
+                        <li><a href="#" data-testid="link-partnerships">Partnerships</a></li>
+                        <li><a href="#" data-testid="link-grants">Grant Opportunities</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>NGO Support: +1 (555) 123-4568</p>
+                    <p>Email: ngos@farmconnect.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

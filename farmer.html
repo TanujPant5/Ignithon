@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Portal - FarmConnect</title>
+    <meta name="description" content="Farmer dashboard for smart farming, selling produce, managing waste, and accessing AI tools for better yields.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌱 FarmConnect</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" data-testid="link-home">Home</a></li>
+                <li><a href="farmer.html" class="active" data-testid="link-farmer">Farmer Portal</a></li>
+                <li><a href="ngo.html" data-testid="link-ngo">NGO Portal</a></li>
+                <li><a href="market.html" data-testid="link-market">Market</a></li>
+            </ul>
+            <div class="hamburger" data-testid="button-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="dashboard-hero">
+        <div class="container">
+            <h1 data-testid="text-farmer-title">Welcome, Farmer! 🚜</h1>
+            <p data-testid="text-farmer-subtitle">Manage your farm, sell produce, and access smart farming tools</p>
+        </div>
+    </section>
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Smart Farming Tools -->
+                <div class="dashboard-card" data-testid="card-smart-farming">
+                    <div class="card-icon">🤖</div>
+                    <h3>Smart Farming Tools</h3>
+                    <p>AI-powered insights for crop management</p>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="crop-type" data-testid="label-crop-type">Crop Type:</label>
+                            <select id="crop-type" data-testid="select-crop-type">
+                                <option value="">Select Crop</option>
+                                <option value="wheat">Wheat</option>
+                                <option value="corn">Corn</option>
+                                <option value="rice">Rice</option>
+                                <option value="tomatoes">Tomatoes</option>
+                                <option value="lettuce">Lettuce</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="field-size" data-testid="label-field-size">Field Size (acres):</label>
+                            <input type="number" id="field-size" placeholder="Enter field size" data-testid="input-field-size">
+                        </div>
+                        <button class="btn btn-primary" onclick="generateAIRecommendations()" data-testid="button-get-recommendations">Get AI Recommendations</button>
+                        <div id="ai-recommendations" class="recommendations" data-testid="text-ai-recommendations"></div>
+                    </div>
+                </div>
+
+                <!-- Sell Produce -->
+                <div class="dashboard-card" data-testid="card-sell-produce">
+                    <div class="card-icon">🛒</div>
+                    <h3>Farmer-to-Market</h3>
+                    <p>List your produce for direct sales</p>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="produce-name" data-testid="label-produce-name">Produce Name:</label>
+                            <input type="text" id="produce-name" placeholder="e.g., Organic Tomatoes" data-testid="input-produce-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity" data-testid="label-quantity">Quantity (kg):</label>
+                            <input type="number" id="quantity" placeholder="Enter quantity" data-testid="input-quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="price" data-testid="label-price">Price per kg (₹):</label>
+                            <input type="number" id="price" step="1" placeholder="Enter price" data-testid="input-price">
+                        </div>
+                        <button class="btn btn-primary" onclick="listProduce()" data-testid="button-list-produce">List Produce</button>
+                        <div id="listed-produce" class="produce-list" data-testid="text-listed-produce"></div>
+                    </div>
+                </div>
+
+                <!-- Surplus Food Donation -->
+                <div class="dashboard-card" data-testid="card-food-rescue">
+                    <div class="card-icon">🍽️</div>
+                    <h3>Food Rescue</h3>
+                    <p>Donate surplus food to NGOs</p>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="surplus-food" data-testid="label-surplus-food">Surplus Food:</label>
+                            <input type="text" id="surplus-food" placeholder="e.g., 50kg Carrots" data-testid="input-surplus-food">
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry-date" data-testid="label-expiry-date">Best Before:</label>
+                            <input type="date" id="expiry-date" data-testid="input-expiry-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup-location" data-testid="label-pickup-location">Pickup Location:</label>
+                            <input type="text" id="pickup-location" placeholder="Farm address" data-testid="input-pickup-location">
+                        </div>
+                        <button class="btn btn-primary" onclick="donateSurplusFood()" data-testid="button-donate-food">Donate Food</button>
+                        <div id="donation-status" class="status-message" data-testid="text-donation-status"></div>
+                    </div>
+                </div>
+
+                <!-- Fertilizer Management -->
+                <div class="dashboard-card" data-testid="card-fertilizer">
+                    <div class="card-icon">♻️</div>
+                    <h3>Organic Fertilizer</h3>
+                    <p>Request composted fertilizer from waste</p>
+                    <div class="card-content">
+                        <div class="form-group">
+                            <label for="fertilizer-type" data-testid="label-fertilizer-type">Fertilizer Type:</label>
+                            <select id="fertilizer-type" data-testid="select-fertilizer-type">
+                                <option value="">Select Type</option>
+                                <option value="compost">Compost</option>
+                                <option value="manure">Organic Manure</option>
+                                <option value="food-waste">Food Waste Compost</option>
+                                <option value="green-waste">Green Waste Compost</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fertilizer-quantity" data-testid="label-fertilizer-quantity">Quantity Needed (tons):</label>
+                            <input type="number" id="fertilizer-quantity" placeholder="Enter quantity" data-testid="input-fertilizer-quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery-address" data-testid="label-delivery-address">Delivery Address:</label>
+                            <input type="text" id="delivery-address" placeholder="Farm address" data-testid="input-delivery-address">
+                        </div>
+                        <button class="btn btn-primary" onclick="requestFertilizer()" data-testid="button-request-fertilizer">Request Fertilizer</button>
+                        <div id="fertilizer-status" class="status-message" data-testid="text-fertilizer-status"></div>
+                    </div>
+                </div>
+
+                <!-- Farm Analytics -->
+                <div class="dashboard-card wide" data-testid="card-analytics">
+                    <div class="card-icon">📊</div>
+                    <h3>Farm Analytics</h3>
+                    <p>Track your farm's performance and sustainability metrics</p>
+                    <div class="analytics-grid">
+                        <div class="metric" data-testid="metric-yield">
+                            <h4>Crop Yield</h4>
+                            <div class="metric-value">+15%</div>
+                            <div class="metric-trend positive">↗ vs last season</div>
+                        </div>
+                        <div class="metric" data-testid="metric-waste">
+                            <h4>Waste Reduced</h4>
+                            <div class="metric-value">2.3 tons</div>
+                            <div class="metric-trend positive">↗ this month</div>
+                        </div>
+                        <div class="metric" data-testid="metric-fertilizer">
+                            <h4>Organic Fertilizer Used</h4>
+                            <div class="metric-value">1.8 tons</div>
+                            <div class="metric-trend positive">↗ eco-friendly</div>
+                        </div>
+                        <div class="metric" data-testid="metric-revenue">
+                            <h4>Direct Sales Revenue</h4>
+                            <div class="metric-value">₹9,96,000</div>
+                            <div class="metric-trend positive">↗ this month</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🌱 FarmConnect</h3>
+                    <p>Empowering farmers with technology and community support.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Farmer Resources</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-ai-tools">AI Farming Tools</a></li>
+                        <li><a href="#" data-testid="link-market-access">Market Access</a></li>
+                        <li><a href="#" data-testid="link-fertilizer-program">Fertilizer Program</a></li>
+                        <li><a href="#" data-testid="link-food-donation">Food Donation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-help-center">Help Center</a></li>
+                        <li><a href="#" data-testid="link-training">Training Videos</a></li>
+                        <li><a href="#" data-testid="link-community">Community Forum</a></li>
+                        <li><a href="#" data-testid="link-contact">Contact Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Farmer Support: +1 (555) 123-4567</p>
+                    <p>Email: farmers@farmconnect.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

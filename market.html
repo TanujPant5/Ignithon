@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market - FarmConnect</title>
+    <meta name="description" content="Buy fresh produce directly from local farmers at fair prices. Support sustainable agriculture and local communities.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🌱 FarmConnect</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" data-testid="link-home">Home</a></li>
+                <li><a href="farmer.html" data-testid="link-farmer">Farmer Portal</a></li>
+                <li><a href="ngo.html" data-testid="link-ngo">NGO Portal</a></li>
+                <li><a href="market.html" class="active" data-testid="link-market">Market</a></li>
+            </ul>
+            <div class="hamburger" data-testid="button-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="dashboard-hero">
+        <div class="container">
+            <h1 data-testid="text-market-title">Fresh from Farm to Table 🛒</h1>
+            <p data-testid="text-market-subtitle">Buy directly from local farmers and support sustainable agriculture</p>
+        </div>
+    </section>
+
+    <section class="market-filters">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="filter-group">
+                    <label for="category-filter" data-testid="label-category">Category:</label>
+                    <select id="category-filter" data-testid="select-category" onchange="filterProducts()">
+                        <option value="">All Categories</option>
+                        <option value="vegetables">Vegetables</option>
+                        <option value="fruits">Fruits</option>
+                        <option value="grains">Grains</option>
+                        <option value="herbs">Herbs</option>
+                        <option value="organic">Organic</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="price-filter" data-testid="label-price">Max Price:</label>
+                    <input type="range" id="price-filter" min="50" max="4000" value="4000" data-testid="input-price" onchange="filterProducts()">
+                    <span id="price-display" data-testid="text-price-display">₹4000/kg</span>
+                </div>
+                <div class="filter-group">
+                    <input type="text" id="search-filter" placeholder="Search produce..." data-testid="input-search" onkeyup="filterProducts()">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="market-content">
+        <div class="container">
+            <div class="market-grid" id="market-grid" data-testid="market-grid">
+                <!-- Sample products - will be replaced by farmer listings -->
+                <div class="product-card" data-testid="product-card-1" data-category="vegetables" data-price="280">
+                    <div class="product-image">🍅</div>
+                    <div class="product-info">
+                        <h3>Organic Tomatoes</h3>
+                        <p class="farmer-name">Green Valley Farm</p>
+                        <p class="product-description">Fresh, vine-ripened organic tomatoes. Perfect for salads and cooking.</p>
+                        <div class="product-details">
+                            <span class="available-qty">Available: 50kg</span>
+                            <span class="location">📍 Valley County</span>
+                        </div>
+                        <div class="product-pricing">
+                            <span class="price">₹280/kg</span>
+                            <div class="quantity-controls">
+                                <label for="qty-1">Quantity (kg):</label>
+                                <input type="number" id="qty-1" min="1" max="50" value="1" data-testid="input-qty-1">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('tomatoes', 1)" data-testid="button-buy-tomatoes">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-testid="product-card-2" data-category="fruits" data-price="336">
+                    <div class="product-image">🍎</div>
+                    <div class="product-info">
+                        <h3>Fresh Apples</h3>
+                        <p class="farmer-name">Sunset Orchard</p>
+                        <p class="product-description">Crisp, sweet apples harvested this week. Great for snacking or baking.</p>
+                        <div class="product-details">
+                            <span class="available-qty">Available: 30kg</span>
+                            <span class="location">📍 Hill District</span>
+                        </div>
+                        <div class="product-pricing">
+                            <span class="price">₹336/kg</span>
+                            <div class="quantity-controls">
+                                <label for="qty-2">Quantity (kg):</label>
+                                <input type="number" id="qty-2" min="1" max="30" value="1" data-testid="input-qty-2">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('apples', 2)" data-testid="button-buy-apples">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-testid="product-card-3" data-category="vegetables" data-price="224">
+                    <div class="product-image">🥕</div>
+                    <div class="product-info">
+                        <h3>Farm Fresh Carrots</h3>
+                        <p class="farmer-name">Community Garden Co-op</p>
+                        <p class="product-description">Sweet, crunchy carrots grown with organic methods. Rich in vitamins.</p>
+                        <div class="product-details">
+                            <span class="available-qty">Available: 75kg</span>
+                            <span class="location">📍 Downtown</span>
+                        </div>
+                        <div class="product-pricing">
+                            <span class="price">₹224/kg</span>
+                            <div class="quantity-controls">
+                                <label for="qty-3">Quantity (kg):</label>
+                                <input type="number" id="qty-3" min="1" max="75" value="1" data-testid="input-qty-3">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('carrots', 3)" data-testid="button-buy-carrots">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-testid="product-card-4" data-category="grains" data-price="120">
+                    <div class="product-image">🌾</div>
+                    <div class="product-info">
+                        <h3>Organic Wheat</h3>
+                        <p class="farmer-name">Golden Fields Farm</p>
+                        <p class="product-description">Premium organic wheat flour, stone-ground for maximum nutrition.</p>
+                        <div class="product-details">
+                            <span class="available-qty">Available: 100kg</span>
+                            <span class="location">📍 Prairie County</span>
+                        </div>
+                        <div class="product-pricing">
+                            <span class="price">₹120/kg</span>
+                            <div class="quantity-controls">
+                                <label for="qty-4">Quantity (kg):</label>
+                                <input type="number" id="qty-4" min="1" max="100" value="1" data-testid="input-qty-4">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('wheat', 4)" data-testid="button-buy-wheat">Add to Cart</button>
+                    </div>
+                </div>
+
+                <div class="product-card" data-testid="product-card-5" data-category="herbs" data-price="640">
+                    <div class="product-image">🌿</div>
+                    <div class="product-info">
+                        <h3>Fresh Herbs Bundle</h3>
+                        <p class="farmer-name">Herb Garden Collective</p>
+                        <p class="product-description">Mix of basil, cilantro, parsley, and mint. Freshly harvested daily.</p>
+                        <div class="product-details">
+                            <span class="available-qty">Available: 15kg</span>
+                            <span class="location">📍 Garden District</span>
+                        </div>
+                        <div class="product-pricing">
+                            <span class="price">₹640/kg</span>
+                            <div class="quantity-controls">
+                                <label for="qty-5">Quantity (kg):</label>
+                                <input type="number" id="qty-5" min="1" max="15" value="1" data-testid="input-qty-5">
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" onclick="addToCart('herbs', 5)" data-testid="button-buy-herbs">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Dynamic products from farmers will be added here -->
+                <div id="farmer-products" data-testid="farmer-products"></div>
+            </div>
+
+            <div id="no-products" class="no-products" style="display: none;" data-testid="text-no-products">
+                <h3>No products found</h3>
+                <p>Try adjusting your filters or search terms.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cart-sidebar" id="cart-sidebar" data-testid="cart-sidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="cart-close" onclick="toggleCart()" data-testid="button-close-cart">×</button>
+        </div>
+        <div class="cart-items" id="cart-items" data-testid="cart-items">
+            <!-- Cart items will be added here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cart-total" data-testid="text-cart-total">0.00</span></strong>
+            </div>
+            <button class="btn btn-primary cart-checkout" onclick="checkout()" data-testid="button-checkout">Checkout</button>
+        </div>
+    </section>
+
+    <div class="cart-toggle" onclick="toggleCart()" data-testid="button-toggle-cart">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cart-count" data-testid="text-cart-count">0</span>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🌱 FarmConnect</h3>
+                    <p>Supporting local farmers and sustainable agriculture through direct sales.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Fresh Produce</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-vegetables">Vegetables</a></li>
+                        <li><a href="#" data-testid="link-fruits">Fruits</a></li>
+                        <li><a href="#" data-testid="link-grains">Grains</a></li>
+                        <li><a href="#" data-testid="link-herbs">Herbs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#" data-testid="link-delivery">Delivery Info</a></li>
+                        <li><a href="#" data-testid="link-quality">Quality Guarantee</a></li>
+                        <li><a href="#" data-testid="link-returns">Returns</a></li>
+                        <li><a href="#" data-testid="link-contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Customer Service: +1 (555) 123-4569</p>
+                    <p>Email: market@farmconnect.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FarmConnect. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
